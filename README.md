@@ -22,8 +22,15 @@ And Author
 
     mvn clean install -PautoInstallBundle
 
+## Page name and AnalyticsPageNameProvider implementation
+This project also contains an AnalyticsPageNameProvider implementation to remove the /content/ from the path and add a site name through a constant, this is again a sample and prefrably should be extracted to a config.
+Result of the datalayer and CustomPageNameProvider are expected to be "sitename:path:to:page"
+
+
 ## Testing
 Currnet test covers the response with a string other then "" from teh data layer and does not check structure. this could be added to DataLayerTest class if needed.
 
+
 ## Misc
-This is a sample and introduces very minimal information cover to showcase a datalayer capability with Sling Models. this should be extended to each project and represent important information on the page/user/cart/etc you wish to be easily available in a datalayer.
+This is a sample project to introduce a very minimaly covering datalyer with light ammount of information to showcase a datalayer capability with Sling Models.
+If you are heading to use this in your project you should be extending the model to represent important information on the page/user/cart/etc you wish to be easily available in a datalayer.
