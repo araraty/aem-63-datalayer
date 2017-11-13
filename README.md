@@ -26,4 +26,4 @@ And Author
 Currnet test covers the response with a string other then "" from teh data layer and does not check structure. this could be added to DataLayerTest class if needed.
 
 ## Misc
-This is a sanple and introduces very minimal information cover to showcase a datalayer capability with Sling Models. this should be extended to each project and represent important information on the page/user/cart/etc you wish to be easily available in a datalayer.
+This is a sample and introduces very minimal information cover to showcase a datalayer capability with Sling Models. this should be extended to each project and represent important information on the page/user/cart/etc you wish to be easily available in a datalayer.
