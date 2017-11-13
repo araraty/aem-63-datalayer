@@ -1,5 +1,5 @@
 # aem-63-datalayer
-AEM 6.3 Datalayer sample implementation with matching AnalyticsPageNameProvider implementation to support the AEM import and content insight support when using a custom pageName.
+AEM 6.3 SP1 (6.3.1) Datalayer sample implementation with matching AnalyticsPageNameProvider implementation to support the AEM import and content insight support when using a custom pageName.
 ##Data Layer
 A sling Model implementation supporting page and user details to show the ability to use resource and request in relation to the page information.
 Works with JSONP implementation javax.json.JsonObject to align with the removal of JSONObject from AEM.
