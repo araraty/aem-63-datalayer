@@ -1,0 +1,17 @@
+{
+  "jcr:primaryType": "cq:Page",
+  "jcr:createdBy": "admin",
+  "jcr:created": "Fri Nov 03 2017 13:56:12 GMT+0000",
+  "jcr:content":
+  {
+    "jcr:primaryType": "cq:PageContent",
+    "jcr:createdBy": "admin",
+    "jcr:title": "Parent page",
+    "cq:template": "/apps/myproject/templates/common-page",
+    "isRootPage": true,
+    "jcr:created": "Fri Nov 03 2017 13:56:12 GMT+0000",
+    "cq:lastModified": "Fri Nov 03 2017 13:56:12 GMT+0000",
+    "sling:resourceType": "proj1/page",
+    "cq:lastModifiedBy": "admin"
+  }
+}
