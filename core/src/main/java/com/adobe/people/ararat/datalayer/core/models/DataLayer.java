@@ -93,7 +93,7 @@ public class DataLayer{
                     .add("user", Json.createObjectBuilder()
                             .add("profile", Json.createObjectBuilder()
                                     .add("attributes", Json.createObjectBuilder()
-                                            .add("loggedIn", (user != null && user.getID()!="anonymous"))
+                                            .add("loggedIn", !(user != null && user.getID()!="anonymous"))
                                             .add("username", getUserHash(user)))
                                     .build()
                                 )
@@ -113,7 +113,7 @@ public class DataLayer{
     //User Utils
     private String getUserHash(User currentUser){
         try {
-            if(currentUser != null) {
+            if(currentUser != null && user.getID()!="anonymous") {
                 return String.valueOf(currentUser.getID().getBytes("UTF-8"));
             }
             else{return "";}
