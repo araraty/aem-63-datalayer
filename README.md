@@ -2,13 +2,13 @@
 AEM 6.3 SP1 (6.3.1) Datalayer sample implementation with matching AnalyticsPageNameProvider implementation to support the AEM import and content insight support when using a custom pageName.
 This implementation relies on ACS Commons https://adobe-consulting-services.github.io/acs-aem-commons/ (not a specific version and been tested with 2.12.0 and 3.17.0)
 
-##Data Layer
+## Data Layer
 A sling Model implementation supporting page and user details to show the ability to use resource and request in relation to the page information.
 Works with JSONP implementation javax.json.JsonObject to align with the removal of JSONObject from AEM.
 ##AnalyticsPageNameProvider implementation
 This changes the page name mechanism.
 
-##Building the project
+## Building the project
 Will build and deploy using maven.
 Will require implementation to a demo page which i have not included.
 Supports:
@@ -26,7 +26,7 @@ And Author
     cd ui.apps
     mvn clean install -PautoInstallBundle
 
-##Including the datalayer in a page
+## Including the datalayer in a page
 To introduce the datalayer to your page you will need to add the component of the datalayer in the page component, thi is usually in the header libs.
 In we.retail you will add this at the
 by including in the page component custom header libraries
