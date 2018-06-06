@@ -47,4 +47,9 @@ public class DataLayerTest{
         Assert.assertNotNull(mymodel);
         Assert.assertNotSame("",mymodel.getDatalayer());
     }
+    @Test
+    public void isAnonymousUserTest() {
+        Assert.assertNotNull(mymodel);
+        Assert.assertNotSame("",mymodel.getDatalayer());
+    }
 }

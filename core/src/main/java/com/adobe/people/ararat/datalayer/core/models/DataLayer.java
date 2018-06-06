@@ -1,10 +1,11 @@
 package com.adobe.people.ararat.datalayer.core.models;
 
 
-import org.apache.jackrabbit.api.security.user.User;
+import com.adobe.acs.commons.models.injectors.annotation.AemObject;
+import com.adobe.people.ararat.datalayer.core.utils.PageUtils;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
-import com.adobe.acs.commons.models.injectors.annotation.AemObject;
+import org.apache.jackrabbit.api.security.user.User;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -18,8 +19,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObject;
-
-import static com.adobe.people.ararat.datalayer.core.utils.CONSTANTS.*;
 
 @Model(adaptables = {SlingHttpServletRequest.class})
 public class DataLayer{
@@ -77,16 +76,16 @@ public class DataLayer{
             data = Json.createObjectBuilder()
                     .add("page", Json.createObjectBuilder()
                             .add("pageInfo", Json.createObjectBuilder()
-                                    .add("siteName", this.getSiteName(currentPage))
-                                    .add("section", this.getSection(currentPage))
-                                    .add("pageName", this.getPageName(currentPage))
-                                    .add("title", this.getPageTitle(currentPage))
-                                    .add("internalPageName", this.getInternalName(currentPage))
-                                    .add("vanityURL", this.getVanityUrl(currentPage))
+                                    .add("siteName", PageUtils.getSiteName(currentPage))
+                                    .add("section", PageUtils.getSection(currentPage))
+                                    .add("pageName", PageUtils.getPageName(currentPage))
+                                    .add("title", PageUtils.getPageTitle(currentPage))
+                                    .add("internalPageName", PageUtils.getInternalName(currentPage))
+                                    .add("vanityURL", PageUtils.getVanityUrl(currentPage))
                                     .build())
                             .add("attributes", Json.createObjectBuilder()
-                                    .add("languageCountry", this.getLanguageCountry(currentPage))
-                                    .add("language",this.getLanguage(currentPage))
+                                    .add("languageCountry", PageUtils.getLanguageCountry(currentPage))
+                                    .add("language",PageUtils.getLanguage(currentPage))
                                     .build())
                             .build()
                     )
@@ -94,7 +93,7 @@ public class DataLayer{
                             .add("profile", Json.createObjectBuilder()
                                     .add("attributes", Json.createObjectBuilder()
                                             .add("loggedIn", (user != null && !user.getID().equals("anonymous")))
-                                            .add("username", getUserHash(user)))
+                                            .add("username", PageUtils.getUserHash(user)))
                                     .build()
                                 )
                             .build()
@@ -110,109 +109,6 @@ public class DataLayer{
 
         return(data.toString());
     }
-    //User Utils
-    private String getUserHash(User currentUser){
-        try {
-            if(currentUser != null && !currentUser.getID().equals("anonymous")) {
-                return String.valueOf(currentUser.getID().getBytes("UTF-8"));
-            }
-            else{return "";}
-        }catch(Exception e){
-            log.error("DataLayer:Exception on currentPage.getName() {}",e.getMessage());
-            return "";
-        }
-    }
 
-    //Page Utils
-    private String getInternalName(Page currentPage){
-        try {
-            String returnValue =  currentPage.getName();
-            if(returnValue!= null){
-                return returnValue;
-            }else{
-                return"";
-            }
-        }catch(Exception e){
-            log.error("DataLayer:Exception on currentPage.getName() {}",e.getMessage());
-            return "";
-        }
-    }
-    private String getVanityUrl(Page currentPage){
-        try {
-            String returnValue = currentPage.getVanityUrl();
-            if(returnValue!= null){
-                return returnValue;
-            }else{
-                return"";
-            }
-        }catch(Exception e){
-            log.error("DataLayer:Exception on currentPage.getVanityUrl() {}",e.getMessage());
-            return "";
-        }
-    }
-    private String getPageTitle(Page currentPage){
-        try {
-            String returnValue =  currentPage.getPageTitle();
-            if(returnValue!= null){
-                return returnValue;
-            }else{
-                return"";
-            }
-        }
-        catch(Exception e){
-            log.error("DataLayer:Exception on currentPage.getPageTitle() {}",e.getMessage());
-            return "";
-        }
-    }
-    private String getPageName(Page currentPage) {
-        //Set a caution value to be able to indicate homepage in case of an error
-        String pageName = "aem-63-datalayer";
-        try {
-            if (currentPage != null) {
-                pageName = currentPage.getPath().substring(1).replace('/', ':');
-                pageName = pageName.replace("content:", "");
-            }
-        }
-        catch(Exception e){
-            log.error("DataLayer:Exception whilst generating pageName {}",e.getMessage());
-        }
-        //Return the page name with the prefix of the site.
-        return SITE_NAME + pageName;
-    }
-
-    private String getSiteName(Page currentPage){
-        String[] pagePaths = currentPage.getPath().split("/");
-        if(null!=pagePaths&&pagePaths.length > 1){
-            return pagePaths[2];
-        }
-        return SITE_NAME+"aem-63-datalayer";
-    }
-
-    private String getSection(Page currentPage){
-        String[] pagePaths = currentPage.getPath().split("/");
-        if(null!=pagePaths&&pagePaths.length > 4){
-            return pagePaths[4];
-        }
-        return currentPage.getName();
-    }
-
-    private String getLanguage(Page currentPage){
-        String language = currentPage.getLanguage(false).getLanguage();
-        if(language==""||language==null){
-            return SITE_LANGUAGE;
-        }
-        return language;
-    }
-
-    private String getLanguageCountry(Page currentPage){
-        String languageCountry = currentPage.getLanguage(true).toLanguageTag();
-        if(null != languageCountry){
-            languageCountry = languageCountry.toLowerCase();
-        }
-        if(languageCountry==""||languageCountry==null){
-            return SITE_COUNTRY;
-        }
-        return languageCountry;
-    }
 
 }
