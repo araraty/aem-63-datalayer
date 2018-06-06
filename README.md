@@ -16,10 +16,12 @@ and
 
 Or to deploy it to a publish instance
 
+    cd ui.apps
     mvn clean install -PautoInstallPackagePublish
 
 And Author
 
+    cd ui.apps
     mvn clean install -PautoInstallBundle
 
 ## Page name and AnalyticsPageNameProvider implementation
