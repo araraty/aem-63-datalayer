@@ -30,9 +30,13 @@ And Author
 To introduce the datalayer to your page you will need to add the component of the datalayer in the page component, thi is usually in the header libs.
 In we.retail you will add this at the
 by including in the page component custom header libraries
+
     /apps/weretail/components/structure/page/customheaderlibs.html
+
 the following code
+
     <sly data-sly-resource="${'datalayer' @ resourceType='datalayer/components/common/datalayer'}"/>
+
 Will add the data layer component to the page.
 
 ## Page name and AnalyticsPageNameProvider implementation
